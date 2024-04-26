@@ -1,6 +1,9 @@
 // Import required modules
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
 
 //Create an instance of the Express application
 const app = express();
@@ -25,4 +28,15 @@ app.get('/',(req,res)=>{
 //Start the server
 app.listen(PORT,()=>{
     console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+// Connect to MongoDB using environment variable
+mongoose.connect(process.env.MONGODB_URI, {
+    
+})
+.then(() => {
+    console.log('Connected to MongoDB');
+})
+.catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
 });
