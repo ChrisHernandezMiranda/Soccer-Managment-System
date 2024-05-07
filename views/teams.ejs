@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .sidebar {
+            background-color: #f4f4f4;
+            float: left;
+            padding: 20px;
+            width: 200px;
+            height: 100vh; /* Full height */
+            position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+            overflow: auto; /* Scrollable Sidebar */
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .sidebar div {
+            display: block;
+            margin-bottom: 20px; /* Increased margin between labels */
+            text-decoration: none;
+            color: #333;
+            font-size: 18px; /* Larger text size for labels */
+        }
+        .sidebar div:hover {
+            background-color: #ddd;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .team-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .team-name {
+            display: flex;
+            align-items: center;
+        }
+        .team-actions {
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .add-button {
+            background-color: #008CBA;
+            margin-top: 20px;
+        }
+        .add-button:hover {
+            background-color: #005f6b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Soccer Management System</h1>
+</div>
+
+<div class="sidebar">
+    <div><a href="/">Home</a></div>
+    <div><a href="/teams">Teams</a></div> <!-- Updated href attribute -->
+    <div>Fixtures</div>
+    <div>Players</div>
+    <div>Standings</div>
+    <div>Stats</div>
+</div>
+
+<div class="main-content">
+    <h2>Teams</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Team Logo</th>
+                <th>Team Name</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="team_logo_1.png" alt="Team Logo" class="team-logo"></td>
+                <td class="team-name">Team A</td>
+                <td class="team-actions">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td><img src="team_logo_2.png" alt="Team Logo" class="team-logo"></td>
+                <td class="team-name">Team B</td>
+                <td class="team-actions">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            <!-- Add more rows for additional teams -->
+        </tbody>
+    </table>
+    <a href="/addTeam" class="add-button">Add Team</a>
+
+</div>
+
+</body>
+</html>

@@ -25,6 +25,15 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 
+app.get('/teams', (req, res) => {
+    res.render('teams'); // Render the teams.ejs file
+});
+
+app.get('/addTeam',(req,res)=>{
+    res.render('addTeam');
+});
+
+
 //Start the server
 app.listen(PORT,()=>{
     console.log(`Server is running on http://localhost:${PORT}`);

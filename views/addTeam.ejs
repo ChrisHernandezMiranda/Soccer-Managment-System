@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Team</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+    <style>
+        /* Additional styles specific to the Add Team view */
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .sidebar {
+            background-color: #f4f4f4;
+            float: left;
+            padding: 20px;
+            width: 200px;
+            height: 100vh; /* Full height */
+            position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+            overflow: auto; /* Scrollable Sidebar */
+        }
+        .sidebar div {
+            display: block;
+            margin-bottom: 20px; /* Increased margin between labels */
+            text-decoration: none;
+            color: #333;
+            font-size: 18px; /* Larger text size for labels */
+        }
+        .sidebar div:hover {
+            background-color: #ddd;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #005f6b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Soccer Management System</h1>
+</div>
+
+<div class="sidebar">
+    <div><a href="/">Home</a></div>
+    <div><a href="/teams">Teams</a></div>
+    <div>Fixtures</div>
+    <div>Players</div>
+    <div>Standings</div>
+    <div>Stats</div>
+</div>
+
+<div class="main-content">
+    <h2>Add Team</h2>
+    <form action="/teams" method="POST"> <!-- Form to submit new team data -->
+        <label for="name">Team Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="logo">Team Logo URL:</label>
+        <input type="text" id="logo" name="logo" required>
+
+        <label for="season">Season:</label>
+        <select id="season" name="season">
+            <option value="fall">Fall</option>
+            <option value="summer">Summer</option>
+            <option value="spring">Spring</option>
+            <option value="winter">Winter</option>
+        </select>
+
+        <label for="year">Year:</label>
+        <select id="year" name="year">
+            <!-- Generate options for years from 2024 to 2050 -->
+            <% for (let i = 2024; i <= 2050; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>
+
+        <button type="submit">Add Team</button> <!-- Submit button -->
+    </form>
+</div>
+
+</body>
+</html>
