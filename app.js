@@ -4,7 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const addTeamRouter = require('./models/teamModel');
+const addTeamRouter = require('./teamRoutes');
 
 
 //Create an instance of the Express application

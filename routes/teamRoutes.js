@@ -4,19 +4,12 @@ const express = require('express');
 // Create an Express router instance
 const router = express.Router();
 
+//Import Team Model
 const Team = require('./teamModel');
 
-// Define route handlers
-router.get('/', (req, res) => {
-    // Logic to retrieve and render a list of teams
-    res.render('teams', { teams: [] }); // Assuming you'll pass teams data to the EJS template
-});
 
-app.get('/addTeam',(req,res)=>{
-    res.render('addTeam');
-});
 
-router.post('/addTeam', async (req, res) => {
+router.post('/', async (req, res) => {
     // Logic to create a new team
     try{
         //extract team data from the request body
@@ -39,10 +32,13 @@ router.post('/addTeam', async (req, res) => {
         await newTeam.save();
 
         //Redirect to the teams page after adding the team
-        res.redirect('/');
+        res.redirect('/teams');
     } catch(error){
         console.error('Error adding team:', error);
         res.status(500).send('Error adding team');
     }
 
 });
+
+//Export the router
+module.exports = router; 
