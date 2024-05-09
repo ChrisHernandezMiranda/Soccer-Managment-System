@@ -4,9 +4,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const addTeamRouter = require('./models/teamModel');
+
 
 //Create an instance of the Express application
 const app = express();
+
+app.use(express.json()); // Middleware to parse JSON bodies
 
 // Set views directory for EJS Files
 app.set('views', path.join(__dirname,'views'));
@@ -49,3 +53,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
 });
+
+app.use('/addTeam',addTeamRouter);
