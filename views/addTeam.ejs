@@ -83,12 +83,12 @@
 
 <div class="main-content">
     <h2>Add Team</h2>
-    <form action="/addTeam" method="POST"> <!-- Form to submit new team data -->
+    <form action="/addTeam" method="POST" onsubmit="logFormData()"> <!-- Form to submit new team data -->
         <label for="name">Team Name:</label>
         <input type="text" id="name" name="name" required>
 
         <label for="logo">Team Logo URL:</label>
-        <input type="text" id="logo" name="logo"option>
+        <input type="text" id="logo" name="logo" option>
 
         <label for="season">Season:</label>
         <select id="season" name="season">
@@ -109,6 +109,18 @@
         <button type="submit">Add Team</button> <!-- Submit button -->
     </form>
 </div>
+
+<script>
+    function logFormData() {
+        var formData = {
+            name: document.getElementById('name').value,
+            logo: document.getElementById('logo').value,
+            season: document.getElementById('season').value,
+            year: document.getElementById('year').value
+        };
+        console.log('Form data:', formData);
+    }
+</script>
 
 </body>
 </html>

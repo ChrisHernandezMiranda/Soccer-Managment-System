@@ -4,13 +4,16 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const addTeamRouter = require('./teamRoutes');
+
 
 
 //Create an instance of the Express application
 const app = express();
-
 app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.urlencoded({extended:true}));
+
+const addTeamRouter = require('../Soccer Managment System/routes/teamRoutes');
+
 
 // Set views directory for EJS Files
 app.set('views', path.join(__dirname,'views'));
@@ -20,7 +23,7 @@ app.set('view engine','ejs');
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname,'public')));
-
+a
 
 // Define port number
 const PORT = process.env.PORT || 3000;

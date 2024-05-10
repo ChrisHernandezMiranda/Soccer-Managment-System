@@ -25,24 +25,32 @@
             position: fixed; /* Fixed Sidebar (stay in place on scroll) */
             overflow: auto; /* Scrollable Sidebar */
         }
-        .main-content {
-            margin-left: 220px;
-            padding: 20px;
-        }
         .sidebar div {
             display: block;
-            margin-bottom: 20px; /* Increased margin between labels */
+            margin-bottom: 10px; /* Adjusted margin between sidebar items */
             text-decoration: none;
             color: #333;
-            font-size: 18px; /* Larger text size for labels */
+            font-size: 16px; /* Adjusted font size for sidebar items */
         }
         .sidebar div:hover {
             background-color: #ddd;
         }
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .dropdown {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
         th, td {
             border: 1px solid #ddd;
@@ -80,6 +88,15 @@
         .add-button {
             background-color: #008CBA;
             margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100px;
+            text-align: center;
+            text-decoration: none;
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
         }
         .add-button:hover {
             background-color: #005f6b;
@@ -88,52 +105,97 @@
 </head>
 <body>
 
-<div class="header">
-    <h1>Soccer Management System</h1>
-</div>
-
 <div class="sidebar">
     <div><a href="/">Home</a></div>
-    <div><a href="/teams">Teams</a></div> <!-- Updated href attribute -->
+    <div><a href="/teams">Teams</a></div>
     <div>Fixtures</div>
     <div>Players</div>
     <div>Standings</div>
     <div>Stats</div>
 </div>
 
+<div class="header">
+    <h1>Soccer Management System</h1>
+    <div class="dropdown">
+        <select id="yearSelect">
+            <option value="">Select Year</option>
+            <!-- Populate with years from 2024 to 2050 -->
+            <% for (let i = 2024; i <= 2050; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>
+    </div>
+    <div class="dropdown">
+        <select id="seasonSelect">
+            <option value="">Select Season</option>
+            <option value="fall">Fall</option>
+            <option value="summer">Summer</option>
+            <option value="spring">Spring</option>
+            <option value="winter">Winter</option>
+        </select>
+    </div>
+</div>
+
 <div class="main-content">
-    <h2>Teams</h2>
-    <table>
+    <!-- Team list will be displayed here -->
+    <table id="teamTable">
         <thead>
             <tr>
                 <th>Team Logo</th>
                 <th>Team Name</th>
-                
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><img src="team_logo_1.png" alt="Team Logo" class="team-logo"></td>
-                <td class="team-name">Team A</td>
-                <td class="team-actions">
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td><img src="team_logo_2.png" alt="Team Logo" class="team-logo"></td>
-                <td class="team-name">Team B</td>
-                <td class="team-actions">
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </td>
-            </tr>
-            <!-- Add more rows for additional teams -->
+            <!-- Teams will be dynamically added here -->
         </tbody>
     </table>
     <a href="/addTeam" class="add-button">Add Team</a>
-
 </div>
+
+<script>
+    // JavaScript code to handle selecting year and season
+    const yearSelect = document.getElementById('yearSelect');
+    const seasonSelect = document.getElementById('seasonSelect');
+    const teamTable = document.getElementById('teamTable');
+    
+    // Event listener for year and season selection
+    yearSelect.addEventListener('change', filterTeams);
+    seasonSelect.addEventListener('change', filterTeams);
+    
+    // Function to filter teams based on selected year and season
+    function filterTeams() {
+        const selectedYear = yearSelect.value;
+        const selectedSeason = seasonSelect.value;
+        
+        // Clear previous team list
+        while (teamTable.rows.length > 1) {
+            teamTable.deleteRow(1);
+        }
+        
+        // TODO: Fetch teams from backend based on selectedYear and selectedSeason
+        // Replace this with actual API call
+        
+        // Example teams data
+        const teamsData = [
+            { name: 'Team A', logoUrl: 'team_logo_1.png' },
+            { name: 'Team B', logoUrl: 'team_logo_2.png' }
+            // Add more teams as needed
+        ];
+        
+        // Add filtered teams to table
+        teamsData.forEach(team => {
+            const row = teamTable.insertRow(-1);
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            cell1.innerHTML = `<img src="${team.logoUrl}" alt="Team Logo" class="team-logo">`;
+            cell2.innerText = team.name;
+            cell3.innerHTML = `<button>Edit</button><button>Delete</button>`;
+        });
+    }
+</script>
 
 </body>
 </html>
+

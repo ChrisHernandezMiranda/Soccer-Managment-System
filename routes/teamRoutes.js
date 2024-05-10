@@ -1,21 +1,23 @@
+console.log("importing teamroutes.js");
 // Import required modules
 const express = require('express');
 
 // Create an Express router instance
 const router = express.Router();
 
-//Import Team Model
-const Team = require('./teamModel');
+// Import Team Model
+const Team = require('../models/teamModel');
 
-
-
-router.post('/', async (req, res) => {
+router.post('/addTeam', async (req, res) => {
+    console.log("Received POST request to /addTeam");
     // Logic to create a new team
-    try{
-        //extract team data from the request body
-        const{name, logo,season,year,wins,losses,goalsFor,goalsAgainst,points} = req.body;
+    try {
+        // Extract team data from the request body
+        const { name, logo, season, year, wins, losses, goalsFor, goalsAgainst, points } = req.body;
         
-        //create a new team document
+        console.log("Received data:", req.body);
+
+        // Create a new team document
         const newTeam = new Team({
             name,
             logo,
@@ -28,17 +30,18 @@ router.post('/', async (req, res) => {
             points
         });
 
-        // save the new team to the database
+        // Save the new team to the database
         await newTeam.save();
 
-        //Redirect to the teams page after adding the team
+        console.log("Team added successfully:", newTeam);
+
+        // Redirect to the teams page after adding the team
         res.redirect('/teams');
-    } catch(error){
+    } catch (error) {
         console.error('Error adding team:', error);
         res.status(500).send('Error adding team');
     }
-
 });
 
-//Export the router
-module.exports = router; 
+// Export the router
+module.exports = router;
