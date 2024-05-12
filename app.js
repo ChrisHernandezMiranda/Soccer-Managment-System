@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(express.urlencoded({extended:true}));
 
-const addTeamRouter = require('../Soccer Managment System/routes/teamRoutes');
+const teamRoutes = require('./routes/teamRoutes');
 
 
 // Set views directory for EJS Files
@@ -57,4 +57,4 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.error('Error connecting to MongoDB:', error);
 });
 
-app.use('/addTeam',addTeamRouter);
+app.use('/teams',teamRoutes);
