@@ -116,24 +116,6 @@
 
 <div class="header">
     <h1>Soccer Management System</h1>
-    <div class="dropdown">
-        <select id="yearSelect">
-            <option value="">Select Year</option>
-            <!-- Populate with years from 2024 to 2050 -->
-            <% for (let i = 2024; i <= 2050; i++) { %>
-                <option value="<%= i %>"><%= i %></option>
-            <% } %>
-        </select>
-    </div>
-    <div class="dropdown">
-        <select id="seasonSelect">
-            <option value="">Select Season</option>
-            <option value="fall">Fall</option>
-            <option value="summer">Summer</option>
-            <option value="spring">Spring</option>
-            <option value="winter">Winter</option>
-        </select>
-    </div>
 </div>
 
 <div class="main-content">
@@ -154,27 +136,9 @@
 </div>
 
 <script>
-    // JavaScript code to handle selecting year and season
-    const yearSelect = document.getElementById('yearSelect');
-    const seasonSelect = document.getElementById('seasonSelect');
-    const teamTable = document.getElementById('teamTable');
-    
-    // Event listener for year and season selection
-    yearSelect.addEventListener('change', filterTeams);
-    seasonSelect.addEventListener('change', filterTeams);
-    
-    // Function to filter teams based on selected year and season
-    function filterTeams() {
-        const selectedYear = yearSelect.value;
-        const selectedSeason = seasonSelect.value;
-        
-        // Clear previous team list
-        while (teamTable.rows.length > 1) {
-            teamTable.deleteRow(1);
-        }
-        
-        // TODO: Fetch teams from backend based on selectedYear and selectedSeason
-        // Replace this with actual API call
+    // JavaScript code to handle team data retrieval
+    document.addEventListener('DOMContentLoaded', function () {
+        const teamTable = document.getElementById('teamTable');
         
         // Example teams data
         const teamsData = [
@@ -183,7 +147,7 @@
             // Add more teams as needed
         ];
         
-        // Add filtered teams to table
+        // Add teams to table
         teamsData.forEach(team => {
             const row = teamTable.insertRow(-1);
             const cell1 = row.insertCell(0);
@@ -193,9 +157,8 @@
             cell2.innerText = team.name;
             cell3.innerHTML = `<button>Edit</button><button>Delete</button>`;
         });
-    }
+    });
 </script>
 
 </body>
 </html>
-
