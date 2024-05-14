@@ -32,9 +32,7 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 
-app.get('/teams', (req, res) => {
-    res.render('teams'); // Render the teams.ejs file
-});
+
 
 app.get('/addTeam',(req,res)=>{
     res.render('addTeam');

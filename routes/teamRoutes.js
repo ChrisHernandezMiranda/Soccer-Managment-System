@@ -1,11 +1,14 @@
+// teamRoutes.js
 
-// Import required modules
 const express = require('express');
-
-// Create an Express router instance
 const router = express.Router();
-
 const teamController = require('../controllers/teamController');
+const path = require('path'); 
 
-router.post('/addTeam',teamController.addTeam);
+// Route for adding a team (POST request)
+router.post('/addTeam', teamController.addTeam);
+
+// Route for getting all teams and rendering the teams.ejs view (GET request)
+router.get('/', teamController.getAllTeams); 
+
 module.exports = router;

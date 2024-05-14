@@ -1,103 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character set and viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page -->
     <title>Add Team</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
-    <style>
-        /* Additional styles specific to the Add Team view */
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        .sidebar {
-            background-color: #f4f4f4;
-            float: left;
-            padding: 20px;
-            width: 200px;
-            height: 100vh; /* Full height */
-            position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-            overflow: auto; /* Scrollable Sidebar */
-        }
-        .sidebar div {
-            display: block;
-            margin-bottom: 20px; /* Increased margin between labels */
-            text-decoration: none;
-            color: #333;
-            font-size: 18px; /* Larger text size for labels */
-        }
-        .sidebar div:hover {
-            background-color: #ddd;
-        }
-        .main-content {
-            margin-left: 220px;
-            padding: 20px;
-        }
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #008CBA;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button[type="submit"]:hover {
-            background-color: #005f6b;
-        }
-    </style>
+    <!-- Link to the external CSS files -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the common styles -->
+    <link rel="stylesheet" href="add-team-styles.css"> <!-- Link to the specific styles for Add Team view -->
 </head>
 <body>
 
+<!-- Header section -->
 <div class="header">
+    <!-- Heading for the page -->
     <h1>Soccer Management System</h1>
 </div>
 
+<!-- Sidebar section -->
 <div class="sidebar">
+    <!-- Sidebar navigation links -->
     <div><a href="/">Home</a></div>
     <div><a href="/teams">Teams</a></div>
+    <!-- Placeholder links for other sections -->
     <div>Fixtures</div>
     <div>Players</div>
     <div>Standings</div>
     <div>Stats</div>
 </div>
 
+<!-- Main content section -->
 <div class="main-content">
+    <!-- Title for the Add Team view -->
     <h2>Add Team</h2>
-    <form action="/teams/addTeam" method="POST" onsubmit="logFormData()"> <!-- Form to submit new team data -->
+    <!-- Form to submit new team data -->
+    <form action="/teams/addTeam" method="POST" onsubmit="logFormData()">
+        <!-- Input field for team name -->
         <label for="name">Team Name:</label>
         <input type="text" id="name" name="name" required>
 
+        <!-- Input field for team logo URL -->
         <label for="logo">Team Logo URL:</label>
         <input type="text" id="logo" name="logo" option>
 
+        <!-- Dropdown for selecting the season -->
         <label for="season">Season:</label>
         <select id="season" name="season">
-            <option value="fall">Fall</option>
-            <option value="summer">Summer</option>
-            <option value="spring">Spring</option>
-            <option value="winter">Winter</option>
+            <!-- Options for selecting the season -->
+            <option value="Fall">Fall</option>
+            <option value="Summer">Summer</option>
+            <option value="Spring">Spring</option>
+            <option value="Winter">Winter</option>
         </select>
 
+        <!-- Dropdown for selecting the year -->
         <label for="year">Year:</label>
         <select id="year" name="year">
             <!-- Generate options for years from 2024 to 2050 -->
@@ -106,12 +63,15 @@
             <% } %>
         </select>
 
-        <button type="submit">Add Team</button> <!-- Submit button -->
+        <!-- Submit button -->
+        <button type="submit">Add Team</button>
     </form>
 </div>
 
+<!-- JavaScript function to log form data -->
 <script>
     function logFormData() {
+        // Retrieve form data and log it to the console
         var formData = {
             name: document.getElementById('name').value,
             logo: document.getElementById('logo').value,

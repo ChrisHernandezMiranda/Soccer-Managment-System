@@ -1,164 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character set and viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page -->
     <title>Teams</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        .sidebar {
-            background-color: #f4f4f4;
-            float: left;
-            padding: 20px;
-            width: 200px;
-            height: 100vh; /* Full height */
-            position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-            overflow: auto; /* Scrollable Sidebar */
-        }
-        .sidebar div {
-            display: block;
-            margin-bottom: 10px; /* Adjusted margin between sidebar items */
-            text-decoration: none;
-            color: #333;
-            font-size: 16px; /* Adjusted font size for sidebar items */
-        }
-        .sidebar div:hover {
-            background-color: #ddd;
-        }
-        .main-content {
-            margin-left: 220px;
-            padding: 20px;
-        }
-        .dropdown {
-            display: inline-block;
-            margin-right: 20px;
-        }
-        select {
-            padding: 8px;
-            font-size: 16px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .team-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-        .team-name {
-            display: flex;
-            align-items: center;
-        }
-        .team-actions {
-            display: flex;
-            justify-content: center;
-        }
-        button {
-            padding: 8px 16px;
-            margin: 0 5px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .add-button {
-            background-color: #008CBA;
-            margin-top: 20px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100px;
-            text-align: center;
-            text-decoration: none;
-            padding: 10px;
-            color: white;
-            border-radius: 5px;
-        }
-        .add-button:hover {
-            background-color: #005f6b;
-        }
-    </style>
+    <!-- Linking to external CSS file -->
+    <link rel="stylesheet" type="text/css" href="teams.css">
 </head>
 <body>
+    <!-- Sidebar section -->
+    <div class="sidebar">
+        <!-- Sidebar navigation links -->
+        <div><a href="/">Home</a></div>
+        <div><a href="/teams">Teams</a></div>
+    </div>
 
-<div class="sidebar">
-    <div><a href="/">Home</a></div>
-    <div><a href="/teams">Teams</a></div>
-    <div>Fixtures</div>
-    <div>Players</div>
-    <div>Standings</div>
-    <div>Stats</div>
-</div>
-
-<div class="header">
-    <h1>Soccer Management System</h1>
-</div>
-
-<div class="main-content">
-    <!-- Team list will be displayed here -->
-    <table id="teamTable">
-        <thead>
-            <tr>
-                <th>Team Logo</th>
-                <th>Team Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Teams will be dynamically added here -->
-        </tbody>
-    </table>
-    <a href="/addTeam" class="add-button">Add Team</a>
-</div>
-
-<script>
-    // JavaScript code to handle team data retrieval
-    document.addEventListener('DOMContentLoaded', function () {
-        const teamTable = document.getElementById('teamTable');
-        
-        // Example teams data
-        const teamsData = [
-            { name: 'Team A', logoUrl: 'team_logo_1.png' },
-            { name: 'Team B', logoUrl: 'team_logo_2.png' }
-            // Add more teams as needed
-        ];
-        
-        // Add teams to table
-        teamsData.forEach(team => {
-            const row = teamTable.insertRow(-1);
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-            cell1.innerHTML = `<img src="${team.logoUrl}" alt="Team Logo" class="team-logo">`;
-            cell2.innerText = team.name;
-            cell3.innerHTML = `<button>Edit</button><button>Delete</button>`;
-        });
-    });
-</script>
-
+    <!-- Header section -->
+    <div class="header">
+        <!-- Heading for the page -->
+        <h1>Soccer Management System</h1>
+    </div>
+    
+    <!-- Main content section -->
+    <div class="main-content">
+        <!-- Title for the Teams view -->
+        <h2>Teams</h2>
+        <!-- Table to display team information -->
+        <table id="teamTable">
+            <thead>
+                <tr>
+                    <!-- Table headers -->
+                    <th>Team Logo</th>
+                    <th>Team Name</th>
+                    <th>Season</th> 
+                    <th>Year</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through teams data and display in table rows -->
+                <% teams.forEach(team => { %>
+                    <tr>
+                        <!-- Team logo column -->
+                        <td><img src="<%= team.logoUrl %>" alt="<%= team.name %> Logo" class="team-logo"></td>
+                        <!-- Team name column -->
+                        <td><%= team.name %></td>
+                        <!-- Season column -->
+                        <td><%= team.season %></td> 
+                        <!-- Year column -->
+                        <td><%= team.year %></td>
+                        <!-- Actions column with edit and delete buttons -->
+                        <td>
+                            <a href="/editTeam/<%= team._id %>" class="edit-button">Edit</a>
+                            <!-- Delete button with confirmation prompt -->
+                            <a href="/deleteTeam/<%= team._id %>" onclick="return confirm('Are you sure you want to delete this team?')" class="delete-button">Delete</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <!-- Link to add new team -->
+        <a href="/addTeam" class="add-button">Add Team</a>
+    </div>
 </body>
 </html>
