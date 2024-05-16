@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Team</title>
+    <link rel="stylesheet" href="/edit-team-styles.css"> 
+</head>
+<body>
+    <header class="header">
+        <h1>Soccer Management System</h1>
+    </header>
+    <aside class="sidebar">
+        <a href="/">Home</a>
+        <a href="/teams">Teams</a>
+    </aside>
+    <main class="main-content">
+        <h2>Edit Team: <%= team.name %></h2>
+        <form id="editForm"> 
+            <label for="name">Team Name:</label>
+            <input type="text" id="name" name="name" value="<%= team.name %>" required>
+
+            <label for="logo">Team Logo URL:</label>
+            <input type="text" id="logo" name="logo" value="<%= team.logo %>" placeholder="https://..."> 
+
+            <label for="season">Season:</label>
+            <select id="season" name="season">
+                <option value="Fall" <%= team.season === 'Fall' ? 'selected' : '' %>>Fall</option>
+                <option value="Summer" <%= team.season === 'Summer' ? 'selected' : '' %>>Summer</option>
+                <option value="Spring" <%= team.season === 'Spring' ? 'selected' : '' %>>Spring</option>
+                <option value="Winter" <%= team.season === 'Winter' ? 'selected' : '' %>>Winter</option>
+            </select>
+
+            <label for="year">Year:</label>
+            <select id="year" name="year">
+                <% for (let i = 2024; i <= 2050; i++) { %>
+                    <option value="<%= i %>" <%= team.year === i ? 'selected' : '' %>><%= i %></option>
+                <% } %>
+            </select>
+
+            <label for="wins">Wins:</label>
+            <input type="number" id="wins" name="wins" value="<%= team.wins %>">
+
+            <label for="losses">Losses:</label>
+            <input type="number" id="losses" name="losses" value="<%= team.losses %>">
+
+            <label for="goalsFor">Goals For:</label>
+            <input type="number" id="goalsFor" name="goalsFor" value="<%= team.goalsFor %>">
+
+            <label for="goalsAgainst">Goals Against:</label>
+            <input type="number" id="goalsAgainst" name="goalsAgainst" value="<%= team.goalsAgainst %>">
+
+            <label for="points">Points:</label>
+            <input type="number" id="points" name="points" value="<%= team.points %>">
+
+            <button type="submit">Save Changes</button>
+        </form>
+
+        <a href="/teams">Back to Teams</a> 
+    </main>
+
+    <script>
+        const editForm = document.getElementById('editForm');
+        const teamId = '<%= team._id %>'; // Get the team ID from EJS
+        
+        editForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+        
+            const formData = {
+                name: document.getElementById('name').value,
+                logo: document.getElementById('logo').value,
+                season: document.getElementById('season').value,
+                year: document.getElementById('year').value,
+                wins: document.getElementById('wins').value,
+                losses: document.getElementById('losses').value,
+                goalsFor: document.getElementById('goalsFor').value,
+                goalsAgainst: document.getElementById('goalsAgainst').value,
+                points: document.getElementById('points').value
+            };
+        
+            try {
+                const response = await fetch(`/teams/editTeam/${teamId}`, {
+                    method: 'PUT', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+        
+                if (response.ok) {
+                    window.location.href = '/teams';
+                } else {
+                    console.error('Error updating team:', response.statusText);
+                    alert("Error updating team. Please try again.")
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

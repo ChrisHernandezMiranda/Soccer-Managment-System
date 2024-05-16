@@ -14,6 +14,9 @@ const teamSchema = new mongoose.Schema({
     points: {type: Number, default: 0},
 });
 
+
+
+
 //Create the Team model
 const Team = mongoose.model('Team',teamSchema);
 
