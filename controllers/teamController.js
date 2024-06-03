@@ -36,6 +36,7 @@ exports.getAllTeams = async (req, res) => {
 };
 
 
+
 exports.deleteTeam = async (req, res) => {
     try {
         console.log('Delete team route reached');

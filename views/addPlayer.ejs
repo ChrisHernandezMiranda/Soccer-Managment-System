@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for character set and viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page -->
+    <title>Add Player</title>
+    <!-- Link to the external CSS files -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the common styles -->
+    <link rel="stylesheet" href="add-team-styles.css"> <!-- Link to the specific styles for Add Team view -->
+</head>
+<body>
+
+<!-- Header section -->
+<div class="header">
+    <!-- Heading for the page -->
+    <h1>Soccer Management System</h1>
+</div>
+
+<!-- Sidebar section -->
+<div class="sidebar">
+    <!-- Sidebar navigation links -->
+    <div><a href="/">Home</a></div>
+    <div><a href="/teams">Teams</a></div>
+    <!-- Placeholder links for other sections -->
+    <div>Fixtures</div>
+    <div>Players</div>
+    <div>Standings</div>
+    <div>Stats</div>
+</div>
+
+<!-- Main content section -->
+<div class="main-content">
+    <!-- Title for the Add Team view -->
+    <h2>Add PLayer</h2>
+    <!-- Form to submit new team data -->
+    <form action=“/player/addPlayer” method="POST" onsubmit="logFormData()">
+        <!-- Input field for team name -->
+        <label for="name">P Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <!-- Input field for team logo URL -->
+        <label for="logo">Team Logo URL:</label>
+        <input type="text" id="logo" name="logo" option>
+
+        <!-- Dropdown for selecting the season -->
+        <label for="season">Season:</label>
+        <select id="season" name="season">
+            <!-- Options for selecting the season -->
+            <option value="Fall">Fall</option>
+            <option value="Summer">Summer</option>
+            <option value="Spring">Spring</option>
+            <option value="Winter">Winter</option>
+        </select>
+
+        <!-- Dropdown for selecting the year -->
+        <label for="year">Year:</label>
+        <select id="year" name="year">
+            <!-- Generate options for years from 2024 to 2050 -->
+            <% for (let i = 2024; i <= 2050; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>
+
+        <!-- Submit button -->
+        <button type="submit">Add Team</button>
+    </form>
+</div>
+
+<!-- JavaScript function to log form data -->
+<script>
+    function logFormData() {
+        // Retrieve form data and log it to the console
+        var formData = {
+            name: document.getElementById('name').value,
+            logo: document.getElementById('logo').value,
+            season: document.getElementById('season').value,
+            year: document.getElementById('year').value
+        };
+        console.log('Form data:', formData);
+    }
+</script>
+
+</body>
+</html>
+

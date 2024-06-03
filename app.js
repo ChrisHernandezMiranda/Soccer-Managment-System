@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 const teamRoutes = require('./routes/teamRoutes');
+const playerRoutes = require('./routes/playerRoutes');
 // Add other route files as needed
 
 app.set('views', path.join(__dirname, 'views'));
@@ -48,7 +49,12 @@ app.get('/addTeam', (req, res) => {
     res.render('addTeam');
 });
 
+app.get('/addPlayer',(req,res)=>{
+    res.render('addPlayer');
+});
+
 
 // Use your routes
 app.use('/teams', teamRoutes);
-// app.use('/', indexRoutes); // Example for separate routes
+app.use('/players', playerRoutes);
+
